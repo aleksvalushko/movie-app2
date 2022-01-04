@@ -4,7 +4,7 @@
     <div id="content">
       <div id="nav">
         <router-link to="/">
-          Home
+          Popular movies
         </router-link>
         <router-link to="/about">
           About
@@ -48,7 +48,7 @@ ul {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  height: 100vh;
+  height: 100%;
 }
 
 #nav {
@@ -57,6 +57,7 @@ ul {
   background: lightslategray;
   display: flex;
   flex-direction: column;
+  font-size: 20px;
 
   a {
     font-weight: bold;
@@ -74,7 +75,5 @@ ul {
 }
 #content {
   display: flex;
-  height: 92vh;
-  max-height: 100%;
 }
 </style>

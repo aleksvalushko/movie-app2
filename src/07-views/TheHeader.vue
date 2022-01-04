@@ -10,24 +10,57 @@
     </div>
     <div>MOVIE APP</div>
     <div>
-      <el-button type="text">
-        <router-link to="/login">
-          Log In
-        </router-link>
-      </el-button>
-      <span style="margin: 0 5px;">/</span>
-      <el-button type="text">
-        <router-link to="/registration">
-          Registration
-        </router-link>
-      </el-button>
+      <el-autocomplete
+        v-model="searchResult"
+        popper-class="my-autocomplete"
+        :fetch-suggestions="querySearch"
+        placeholder="Search movie"
+        size="small"
+        @select="handleSelect"
+      >
+        <i
+          slot="suffix"
+          class="el-icon-search el-input__icon"
+          @click="handleIconClick"
+        >
+        </i>
+        <template slot-scope="{ item }">
+          <div class="value">
+            {{ item.value }}
+          </div>
+          <span class="link">
+            {{ item.link }}
+          </span>
+        </template>
+      </el-autocomplete>
+      <!--      <el-button type="text">-->
+      <!--        <router-link to="/login">-->
+      <!--          Log In-->
+      <!--        </router-link>-->
+      <!--      </el-button>-->
+      <!--      <span style="margin: 0 5px;">/</span>-->
+      <!--      <el-button type="text">-->
+      <!--        <router-link to="/registration">-->
+      <!--          Registration-->
+      <!--        </router-link>-->
+      <!--      </el-button>-->
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'TheHeader'
+  name: 'TheHeader',
+  data () {
+    return {
+      searchResult: ''
+    }
+  },
+  methods: {
+    handleSelect () {},
+    querySearch () {},
+    handleIconClick () {}
+  }
 }
 </script>
 
@@ -54,6 +87,21 @@ export default {
   }
   :global(.router-link-active) {
     color: white;
+  }
+  .my-autocomplete {
+    li {
+      line-height: normal;
+      padding: 7px;
+
+      .value {
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+      .link {
+        font-size: 12px;
+        color: #b4b4b4;
+      }
+    }
   }
 }
 </style>

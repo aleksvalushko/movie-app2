@@ -14,35 +14,45 @@
         :rules="rules"
         :class="$style.registrationForm"
       >
-        <el-form-item>
+        <el-form-item
+          label="Login"
+        >
           <el-input
             v-model="registrationData.login"
             placeholder="Login"
             clearable
           />
         </el-form-item>
-        <el-form-item>
+        <el-form-item
+          label="First name"
+        >
           <el-input
             v-model="registrationData.firstName"
             placeholder="First name"
             clearable
           />
         </el-form-item>
-        <el-form-item>
+        <el-form-item
+          label="Last name"
+        >
           <el-input
             v-model="registrationData.lastName"
             placeholder="Last name"
             clearable
           />
         </el-form-item>
-        <el-form-item>
+        <el-form-item
+          label="E-mail"
+        >
           <el-input
             v-model="registrationData.email"
             placeholder="E-mail"
             clearable
           />
         </el-form-item>
-        <el-form-item>
+        <el-form-item
+          label="Password"
+        >
           <el-input
             v-model="registrationData.password"
             placeholder="Password"
@@ -50,7 +60,9 @@
             show-password
           />
         </el-form-item>
-        <el-form-item>
+        <el-form-item
+          label="Confirm password"
+        >
           <el-input
             v-model="registrationData.confirmPassword"
             placeholder="Password (confirm)"
@@ -61,6 +73,7 @@
       </el-form>
       <el-button
         type="primary"
+        :class="$style.registerButton"
         @click="onSubmit"
       >
         Register
@@ -70,6 +83,16 @@
 </template>
 
 <script>
+import lodash from 'lodash'
+
+const DEFAULT_REGISTRATION_DATA = {
+  login: '',
+  firstName: '',
+  lastName: '',
+  email: '',
+  password: '',
+  confirmPassword: ''
+}
 export default {
   name: 'LoginPage',
   data () {
@@ -88,6 +111,7 @@ export default {
   methods: {
     onSubmit () {
       console.log(this.registrationData)
+      this.registrationData = lodash.cloneDeep(DEFAULT_REGISTRATION_DATA)
     }
   }
 }
@@ -103,9 +127,6 @@ export default {
   .boxCard {
     width: 40%;
     min-height: 40%;
-    :global(.el-input) {
-      margin-bottom: 20px;
-    }
     :global(.el-form-item) {
       margin-bottom: 0;
     }
@@ -113,22 +134,17 @@ export default {
       margin-bottom: 10px;
       width: 35%;
     }
-    .signUpButton {
-      font-size: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      a {
-        color: #409EFF;
-      }
-      a:hover {
-        text-decoration: underline;
-      }
-    }
     .registrationForm {
+      text-align: left;
+      :global(.el-form-item__label) {
+        padding: 0;
+      }
       :global(.el-link:hover) {
         text-decoration: underline;
       }
+    }
+    .registerButton {
+      margin-top: 20px;
     }
   }
 }

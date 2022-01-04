@@ -14,14 +14,18 @@
         :rules="rules"
         :class="$style.loginForm"
       >
-        <el-form-item>
+        <el-form-item
+          label="Login"
+        >
           <el-input
             v-model="loginData.login"
             placeholder="Login"
             clearable
           />
         </el-form-item>
-        <el-form-item>
+        <el-form-item
+          label="Password"
+        >
           <el-input
             v-model="loginData.password"
             placeholder="Password"
@@ -61,6 +65,7 @@
 
 <script>
 import lodash from 'lodash'
+import { mapActions } from 'vuex'
 
 const DEFAULT_LOGIN_DATA = {
   login: '',
@@ -80,10 +85,12 @@ export default {
     }
   },
   methods: {
-    onSubmit () {
+    async onSubmit () {
       console.log(this.loginData)
+      await this.newToken()
       this.loginData = lodash.cloneDeep(DEFAULT_LOGIN_DATA)
-    }
+    },
+    ...mapActions('main', ['newToken'])
   }
 }
 </script>
@@ -98,9 +105,6 @@ export default {
   .boxCard {
     width: 40%;
     min-height: 40%;
-    :global(.el-input) {
-      margin-bottom: 20px;
-    }
     :global(.el-form-item) {
       margin-bottom: 0;
     }
@@ -121,8 +125,12 @@ export default {
       }
     }
     .loginForm {
+      text-align: left;
       :global(.el-link:hover) {
         text-decoration: underline;
+      }
+      :global(.el-form-item__label) {
+        padding: 0;
       }
     }
   }
