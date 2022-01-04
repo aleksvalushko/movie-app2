@@ -1,0 +1,8 @@
+.git/**/*
+.idea/**/*
+node_modules/**/*
+**/node_modules/**/*
+src/icons/components/*.js
+coverage/**/*
+dist/**/*
+**/__snapshots__/**/*
