@@ -1,12 +1,7 @@
-import Vue from "vue";
-import App from "./App.vue";
-import router from "./router";
-import store from "./store";
 
-Vue.config.productionTip = false;
+// eslint-disable-next-line import/no-unused-modules
+import 'element-ui/lib/theme-chalk/index.css'
 
-new Vue({
-  router,
-  store,
-  render: (h) => h(App),
-}).$mount("#app");
+import { appInit } from './09-app/app.js'
+
+appInit()

@@ -1,17 +1,25 @@
 <template>
   <div :class="$style.theHeader">
-    <img
-      src="../assets/tmdb.svg"
-      alt="logo"
-    />
+    <div :class="$style.logo">
+      <router-link to="/">
+        <img
+          src="../assets/tmdb.svg"
+          alt="logo"
+        />
+      </router-link>
+    </div>
     <div>MOVIE APP</div>
     <div>
       <el-button type="text">
-        LogIn
+        <router-link to="/login">
+          Log In
+        </router-link>
       </el-button>
-      /
+      <span style="margin: 0 5px;">/</span>
       <el-button type="text">
-        Registration
+        <router-link to="/registration">
+          Registration
+        </router-link>
       </el-button>
     </div>
   </div>
@@ -26,18 +34,25 @@ export default {
 <style module lang="scss">
 .theHeader {
   width: 100%;
-  height: 70px;
+  height: 8vh;
   background: #42b983;
   display: flex;
   justify-content: space-around;
   align-items: center;
-  img {
+  .logo {
     width: 10%;
+    img {
+      width: 80%;
+      cursor: pointer;
+    }
   }
-  :global(.el-button--text) {
+  a {
     color: black;
   }
-  :global(.el-button--text:hover) {
+  a:hover {
+    color: white;
+  }
+  :global(.router-link-active) {
     color: white;
   }
 }

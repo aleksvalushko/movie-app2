@@ -1,60 +1,70 @@
 <template>
-  <div :class="$style.loginPage">
+  <div :class="$style.registrationPage">
     <el-card :class="$style.boxCard">
       <div
         slot="header"
         :class="$style.clearfix"
       >
-        <span>LOG IN</span>
+        <span>REGISTRATION</span>
       </div>
       <el-form
         ref="loginForm"
         label-position="top"
-        :model="loginData"
+        :model="registrationData"
         :rules="rules"
-        :class="$style.loginForm"
+        :class="$style.registrationForm"
       >
         <el-form-item>
           <el-input
-            v-model="loginData.login"
-            placeholder="login"
+            v-model="registrationData.login"
+            placeholder="Login"
             clearable
           />
         </el-form-item>
         <el-form-item>
           <el-input
-            v-model="loginData.password"
-            placeholder="password"
+            v-model="registrationData.firstName"
+            placeholder="First name"
+            clearable
+          />
+        </el-form-item>
+        <el-form-item>
+          <el-input
+            v-model="registrationData.lastName"
+            placeholder="Last name"
+            clearable
+          />
+        </el-form-item>
+        <el-form-item>
+          <el-input
+            v-model="registrationData.email"
+            placeholder="E-mail"
+            clearable
+          />
+        </el-form-item>
+        <el-form-item>
+          <el-input
+            v-model="registrationData.password"
+            placeholder="Password"
             clearable
             show-password
           />
         </el-form-item>
-        <div style="display: flex; justify-content: space-between;">
-          <el-form-item>
-            <el-checkbox v-model="loginData.isRememberUser">
-              Remember me
-            </el-checkbox>
-          </el-form-item>
-          <el-link
-            type="primary"
-            :underline="false"
-          >
-            Forgot password?
-          </el-link>
-        </div>
+        <el-form-item>
+          <el-input
+            v-model="registrationData.confirmPassword"
+            placeholder="Password (confirm)"
+            clearable
+            show-password
+          />
+        </el-form-item>
       </el-form>
       <el-button
         type="primary"
         @click="onSubmit"
       >
-        Sign In
+        Register
       </el-button>
-      <div :class="$style.signUpButton">
-        <span style="margin-right: 3px;">Are you new?</span>
-        <router-link to="/registration">
-          Sign up
-        </router-link>
-      </div>
     </el-card>
   </div>
 </template>
@@ -64,24 +74,27 @@ export default {
   name: 'LoginPage',
   data () {
     return {
-      loginData: {
+      registrationData: {
         login: '',
+        firstName: '',
+        lastName: '',
+        email: '',
         password: '',
-        isRememberUser: false
+        confirmPassword: ''
       },
       rules: {}
     }
   },
   methods: {
     onSubmit () {
-      console.log(this.loginData)
+      console.log(this.registrationData)
     }
   }
 }
 </script>
 
 <style module lang="scss">
-.loginPage {
+.registrationPage {
   width: 100%;
   height: 100%;
   display: flex;
@@ -112,7 +125,7 @@ export default {
         text-decoration: underline;
       }
     }
-    .loginForm {
+    .registrationForm {
       :global(.el-link:hover) {
         text-decoration: underline;
       }
