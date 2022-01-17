@@ -86,7 +86,6 @@ export default {
   },
   methods: {
     async onSubmit () {
-      console.log(this.loginData)
       await this.newToken()
       this.loginData = lodash.cloneDeep(DEFAULT_LOGIN_DATA)
     },

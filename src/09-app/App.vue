@@ -6,11 +6,11 @@
         <router-link to="/">
           Popular movies
         </router-link>
-        <router-link to="/about">
-          About
+        <router-link to="/nowPlaying">
+          Now playing
         </router-link>
       </div>
-      <div style="width: 100%;">
+      <div style="width: 80%;">
         <router-view />
       </div>
     </div>
@@ -27,8 +27,12 @@ export default {
 </script>
 
 <style lang="scss">
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap');
+
 body  {
   margin: 0;
+  background-image: url("../assets/it.jpg");
+  background-size: cover;
 }
 
 a  {
@@ -43,18 +47,20 @@ ul {
   margin: 0;
 }
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  //font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Lato', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  height: 100%;
+  height: 100vh;
+  overflow-x: hidden;
 }
 
 #nav {
   padding: 30px;
   width: 20%;
-  background: lightslategray;
+  background-color: lightslategray;
   display: flex;
   flex-direction: column;
   font-size: 20px;
@@ -75,5 +81,6 @@ ul {
 }
 #content {
   display: flex;
+  min-height: 92%;
 }
 </style>

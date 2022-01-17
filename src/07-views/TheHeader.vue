@@ -10,29 +10,28 @@
     </div>
     <div>MOVIE APP</div>
     <div>
-      <el-autocomplete
+      <el-select
         v-model="searchResult"
-        popper-class="my-autocomplete"
-        :fetch-suggestions="querySearch"
+        filterable
+        remote
+        reserve-keyword
+        :remote-method="querySearch"
         placeholder="Search movie"
         size="small"
-        @select="handleSelect"
+        @change="handleSelect"
       >
         <i
-          slot="suffix"
+          slot="prefix"
           class="el-icon-search el-input__icon"
-          @click="handleIconClick"
         >
         </i>
-        <template slot-scope="{ item }">
-          <div class="value">
-            {{ item.value }}
-          </div>
-          <span class="link">
-            {{ item.link }}
-          </span>
-        </template>
-      </el-autocomplete>
+        <el-option
+          v-for="item in searchMovieList"
+          :key="`${item.id}_${item.title}`"
+          :label="item.title"
+          :value="item.id"
+        />
+      </el-select>
       <!--      <el-button type="text">-->
       <!--        <router-link to="/login">-->
       <!--          Log In-->
@@ -49,6 +48,10 @@
 </template>
 
 <script>
+import { mapActions, mapMutations, mapState } from 'vuex'
+
+import { loadInfoAboutMovie } from '../05-components/movieInfo'
+
 export default {
   name: 'TheHeader',
   data () {
@@ -56,10 +59,32 @@ export default {
       searchResult: ''
     }
   },
+  computed: {
+    ...mapState('main', ['searchMovieList', 'movie'])
+  },
   methods: {
-    handleSelect () {},
-    querySearch () {},
-    handleIconClick () {}
+    async handleSelect (item) {
+      try {
+        const movie = await loadInfoAboutMovie(this.$route.params.id)
+        await this.$router.push(`/movie/${item}`)
+        this.SET_MOVIE(movie)
+        this.searchResult = ''
+      } catch (error) {
+        if (error.message.split(' ').includes('404')) {
+          await this.$router.push('/404')
+        }
+      } finally {
+        this.searchResult = ''
+        this.SET_SEARCH_MOVIE_LIST([])
+      }
+    },
+    async querySearch (query) {
+      if (query) {
+        await this.searchMovies(query)
+      }
+    },
+    ...mapActions('main', ['searchMovies']),
+    ...mapMutations('main', ['SET_SEARCH_MOVIE_LIST', 'SET_MOVIE'])
   }
 }
 </script>
@@ -67,15 +92,15 @@ export default {
 <style module lang="scss">
 .theHeader {
   width: 100%;
-  height: 8vh;
-  background: #42b983;
+  height: 8%;
+  background: mediumseagreen;
   display: flex;
   justify-content: space-around;
   align-items: center;
   .logo {
     width: 10%;
     img {
-      width: 80%;
+      width: 90%;
       cursor: pointer;
     }
   }

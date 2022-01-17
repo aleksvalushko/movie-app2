@@ -94,7 +94,7 @@ const DEFAULT_REGISTRATION_DATA = {
   confirmPassword: ''
 }
 export default {
-  name: 'LoginPage',
+  name: 'RegistrationPage',
   data () {
     return {
       registrationData: {
